@@ -11,7 +11,7 @@ var axios = require('axios');
 
 
 var app = express();
-var client = redis.createClient(6379, '127.0.0.1');
+var client = redis.createClient(6379, 'redis');
 
 app.use(CORS());
 
@@ -33,7 +33,7 @@ var mostRecentLinks = [];
 //set up worker to update every 20min
 var getRecentFromDB = function() {
 
-  axios.get('http://localhost:8888/redis')
+  axios.get('http://db:8888/redis')
   .then((res) => {
     console.log('res in /redis in client server');
     //store in mostRecentLinks, should return 20 links
@@ -74,7 +74,7 @@ var getRecentFromDB = function() {
 
 // setInterval(getRecentFromDB, 10000);
 
-// getRecentFromDB();
+getRecentFromDB();
 
 
 //client make request to :3333, send back most recent articles info
