@@ -35,6 +35,7 @@ var getRecentFromDB = function() {
 
   axios.get('http://db:8888/redis')
   .then((res) => {
+    console.log(res, 'redis response');
     console.log('res in /redis in client server');
     //store in mostRecentLinks, should return 20 links
     //YAY getting stuff back
@@ -74,15 +75,14 @@ var getRecentFromDB = function() {
 
 // setInterval(getRecentFromDB, 10000);
 
-getRecentFromDB();
+// getRecentFromDB();
 
 
 //client make request to :3333, send back most recent articles info
 app.get('/getMostRecent', function(req, res) {
-  console.log('here in 3333 over!');
   var promiseQueue = [];
     // var redisPromise = new Promise(function(resolve, reject) {
-  for (var i = 0; i < 20; ++i) {
+  for (var i = 0; i < 50; ++i) {
 
     var linkPromise = new Promise((resolve, reject) => {
       client.hgetall('links:' + i, function(error, value) {
