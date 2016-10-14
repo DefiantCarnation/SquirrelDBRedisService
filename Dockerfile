@@ -13,4 +13,4 @@ RUN cd src && npm install
 COPY . /src
 WORKDIR /src
 
-EXPOSE 3010
+EXPOSE 3333
